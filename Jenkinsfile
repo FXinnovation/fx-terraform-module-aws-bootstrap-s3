@@ -10,17 +10,17 @@ node {
 
       stage('init') {
         terraform.init(
-          subCommand: 'examples/standard-s3'
+          commandTarget: 'examples/standard-s3'
         )
       }
 
       stage('validate'){
         terraform.validate(
-          subCommand: 'examples/standard-s3'
+          commandTarget: 'examples/standard-s3'
         )
         terraform.fmt(
           check: True,
-          subCommand: 'examples/standard-s3'
+          commandTarget: 'examples/standard-s3'
         )
       }
 
@@ -39,7 +39,7 @@ node {
               "aws_access_key=${TF_aws_access_key}",
               "aws_secret_key=${TF_aws_secret_key}"
             ],
-            subCommand: 'examples/standard-s3'
+            commandTarget: 'examples/standard-s3'
           )
 
           try {
@@ -47,12 +47,11 @@ node {
               status: 'PENDING'
             )
 
-            input 'Do you want to apply this plan ?'
+            input 'Do you want to apply this plan?'
             terraform.apply(
               parallelism: 1,
               refresh: false,
-              commandTarget: 'plan.out',
-              subCommand: 'examples/standard-s3'
+              commandTarget: 'examples/standard-s3'
             )
           }catch (errorApply) {
             archiveArtifacts(
@@ -66,7 +65,7 @@ node {
                 "aws_access_key=${TF_aws_access_key}",
                 "aws_secret_key=${TF_aws_secret_key}"
               ],
-              subCommand: 'examples/standard-s3'
+              commandTarget: 'examples/standard-s3'
             )
           }
         }
