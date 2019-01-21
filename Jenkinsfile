@@ -1,3 +1,5 @@
+@Library('public-common-pipeline-jenkins@feature/terraform-fmt') _
+
 node {
   result="SUCCESS"
   try {
@@ -14,6 +16,10 @@ node {
 
       stage('validate'){
         terraform.validate(
+          subCommand: 'examples/standard-s3'
+        )
+        terraform.fmt(
+          check: True,
           subCommand: 'examples/standard-s3'
         )
       }
