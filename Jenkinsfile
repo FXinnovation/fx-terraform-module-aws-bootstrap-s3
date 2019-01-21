@@ -13,7 +13,9 @@ node {
       }
 
       stage('validate'){
-        terraform.validate()
+        terraform.validate(
+          subCommand: 'examples/standard-s3'
+        )
       }
 
       withCredentials([
