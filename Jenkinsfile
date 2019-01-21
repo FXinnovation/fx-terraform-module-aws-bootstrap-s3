@@ -43,14 +43,13 @@ node {
           )
 
           try {
-            fx_notify(
-              status: 'PENDING'
-            )
-
-            input 'Do you want to apply this plan?'
             terraform.apply(
               parallelism: 1,
               refresh: false,
+              vars: [
+                "aws_access_key=${TF_aws_access_key}",
+                "aws_secret_key=${TF_aws_secret_key}"
+              ],
               commandTarget: 'examples/standard-s3'
             )
           }catch (errorApply) {
