@@ -19,7 +19,7 @@ node {
           commandTarget: 'examples/standard-s3'
         )
         terraform.fmt(
-          check: True,
+          check: true,
           commandTarget: 'examples/standard-s3'
         )
       }
