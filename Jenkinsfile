@@ -1,4 +1,4 @@
-@Library('public-common-pipeline-jenkins@feature/terraform-fmt') _
+@Library('com.fxinnovation.public-common-pipeline-jenkins@feature/terraform-fmt') _
 
 node {
   result="SUCCESS"
