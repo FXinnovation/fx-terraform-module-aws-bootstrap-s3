@@ -7,7 +7,7 @@ provider "aws" {
 module "s3_bootstrap" {
   source = "../../"
 
-  s3_region = "eu-west-01"
+  s3_region        = "eu-west-01"
   s3_bucket_prefix = "tftest-bucket-"
-  vendor_prefix = "tftest"
+  vendor_prefix    = "tftest"
 }
