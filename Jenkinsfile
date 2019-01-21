@@ -46,11 +46,13 @@ node {
             terraform.apply(
               parallelism: 1,
               refresh: false,
-              vars: [
-                "aws_access_key=${TF_aws_access_key}",
-                "aws_secret_key=${TF_aws_secret_key}"
-              ],
-              commandTarget: 'examples/standard-s3'
+              commandTarget: 'plan.out'
+            )
+
+            terraform.apply(
+              parallelism: 1,
+              refresh: false,
+              commandTarget: 'plan.out'
             )
           }catch (errorApply) {
             archiveArtifacts(
