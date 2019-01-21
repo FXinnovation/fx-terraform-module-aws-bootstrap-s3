@@ -7,7 +7,9 @@ node {
       }
 
       stage('init') {
-        terraform.init()
+        terraform.init(
+          subCommand: 'examples/standard-s3'
+        )
       }
 
       stage('validate'){
@@ -28,7 +30,8 @@ node {
             vars: [
               "aws_access_key=${TF_aws_access_key}",
               "aws_secret_key=${TF_aws_secret_key}"
-            ]
+            ],
+            subCommand: 'examples/standard-s3'
           )
 
           try {
@@ -40,7 +43,8 @@ node {
             terraform.apply(
               parallelism: 1,
               refresh: false,
-              commandTarget: 'plan.out'
+              commandTarget: 'plan.out',
+              subCommand: 'examples/standard-s3'
             )
           }catch (errorApply) {
             archiveArtifacts(
@@ -53,7 +57,8 @@ node {
               vars: [
                 "aws_access_key=${TF_aws_access_key}",
                 "aws_secret_key=${TF_aws_secret_key}"
-              ]
+              ],
+              subCommand: 'examples/standard-s3'
             )
           }
         }

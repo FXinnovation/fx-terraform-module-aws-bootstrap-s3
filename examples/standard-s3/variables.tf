@@ -2,6 +2,11 @@
 # AWS
 #####
 
+variable "region" {
+  description = "Region."
+  default     = "us-east-1"
+}
+
 variable "aws_access_key" {
   description = "Credentials: AWS access key."
   default     = "PLEASE SET THE AWS ACCESS KEY"
