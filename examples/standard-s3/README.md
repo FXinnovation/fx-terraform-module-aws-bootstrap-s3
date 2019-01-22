@@ -1,4 +1,4 @@
-# Standard S3 reposiory for terraform
+# Standard S3 repository for terraform
 
 Configuration in this directory creates set of S3 resources to be used for terraform’s state files.
 

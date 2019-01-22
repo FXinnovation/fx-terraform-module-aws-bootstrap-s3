@@ -1,7 +1,3 @@
-##############
-# S3 tf bucket
-##############
-
 variable "vendor_prefix" {
   description = "Initials of the company which the project is bootstrapped."
   default     = "vendor"

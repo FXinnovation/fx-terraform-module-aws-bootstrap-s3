@@ -1,7 +1,3 @@
-##############
-# S3 tf bucket
-##############
-
 output "s3_id" {
   description = "The ID of the S3 bucket for terraform state files."
   value       = "${module.s3_bootstrap.s3_id}"

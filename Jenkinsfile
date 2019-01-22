@@ -2,5 +2,5 @@
 
 fx_terraform(
   testEnvironmentCredentialId: 'itoa-application-awscollectors-awscred',
-  terraformCommandTarget: 'examples/standard-s3'
+  terraformCommandTargets:     ['examples/standard-s3']
 )
