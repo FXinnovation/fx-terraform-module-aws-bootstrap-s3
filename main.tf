@@ -3,7 +3,9 @@ resource "aws_kms_key" "terraform_bucket" {
   deletion_window_in_days = 10
 
   tags = {
-    Name = "S3 bucket key for terraform state files."
+    Name        = "S3 bucket key for terraform state files."
+    Environment = "Root"
+    Terraform   = "true"
   }
 }
 
@@ -13,7 +15,9 @@ resource "aws_s3_bucket" "terraform_bucket" {
   region        = "${var.s3_region}"
 
   tags = {
-    Name = "Terraform state files bucket."
+    Name        = "Terraform state files bucket."
+    Environment = "Root"
+    Terraform   = "true"
   }
 
   versioning {
@@ -31,7 +35,14 @@ resource "aws_s3_bucket" "terraform_bucket" {
 }
 
 resource "aws_iam_role" "terraform_bucket" {
-  name = "${upper(var.vendor_prefix)}S3TerraformRole"
+  name        = "${upper(var.vendor_prefix)}S3TerraformRole"
+  description = "Role for Terraform state files bucket."
+
+  tags = {
+    Name        = "Role for Terraform state files bucket."
+    Environment = "Root"
+    Terraform   = "true"
+  }
 
   assume_role_policy = <<POLICY
 {
