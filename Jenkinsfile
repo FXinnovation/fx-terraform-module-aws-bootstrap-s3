@@ -1,6 +1,4 @@
-@Library('com.fxinnovation.fxinnovation-common-pipeline-library@feature/terraform-pipeline') _
-
-fx_terraform(
+fxTerraformWithUsernamePassword(
   testEnvironmentCredentialId: 'itoa-application-awscollectors-awscred',
-  terraformCommandTargets:     ['examples/standard-s3']
+  commandTargets:              ['examples/standard-s3']
 )
