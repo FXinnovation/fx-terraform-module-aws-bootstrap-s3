@@ -3,7 +3,7 @@ resource "aws_kms_key" "terraform_bucket" {
   deletion_window_in_days = 10
 
   tags = {
-    Name        = "S3 bucket key for terraform state files."
+    Name        = "KMS key for S3 bucket for terraform state files."
     Environment = "Root"
     Terraform   = "true"
   }

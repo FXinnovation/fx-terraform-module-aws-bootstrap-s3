@@ -10,7 +10,7 @@ This module should be used in a client-specific bootstrap terraform module.
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | s3\_bucket\_prefix | Prefix of the bucket that will contain terraform state files. | string | `"vendor-tfstate"` | no |
-| s3\_region | Regsion where to create the S3 bucket. | string | `"us-east-1"` | no |
+| s3\_region | Region where to create the S3 bucket. | string | `"us-east-1"` | no |
 | vendor\_prefix | Initials of the company which the project is bootstrapped. | string | `"vendor"` | no |
 
 ## Outputs
