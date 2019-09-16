@@ -10,9 +10,9 @@ resource "aws_kms_key" "terraform_bucket" {
 }
 
 resource "aws_s3_bucket" "terraform_bucket" {
-  bucket_prefix = "${var.s3_bucket_prefix}"
+  bucket_prefix = var.s3_bucket_prefix
   acl           = "private"
-  region        = "${var.s3_region}"
+  region        = var.s3_region
 
   tags = {
     Name        = "Terraform state files bucket."
@@ -27,7 +27,7 @@ resource "aws_s3_bucket" "terraform_bucket" {
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        kms_master_key_id = "${aws_kms_key.terraform_bucket.arn}"
+        kms_master_key_id = aws_kms_key.terraform_bucket.arn
         sse_algorithm     = "aws:kms"
       }
     }
@@ -59,6 +59,7 @@ resource "aws_iam_role" "terraform_bucket" {
   ]
 }
 POLICY
+
 }
 
 data "aws_iam_policy_document" "terraform_bucket" {
@@ -70,7 +71,7 @@ data "aws_iam_policy_document" "terraform_bucket" {
     ]
 
     resources = [
-      "${aws_s3_bucket.terraform_bucket.arn}",
+      aws_s3_bucket.terraform_bucket.arn,
     ]
   }
 }
@@ -78,10 +79,11 @@ data "aws_iam_policy_document" "terraform_bucket" {
 resource "aws_iam_policy" "terraform_bucket" {
   name   = "${upper(var.vendor_prefix)}S3TerraformFullAccess"
   path   = "/"
-  policy = "${data.aws_iam_policy_document.terraform_bucket.json}"
+  policy = data.aws_iam_policy_document.terraform_bucket.json
 }
 
 resource "aws_iam_role_policy_attachment" "terraform_bucket" {
-  role       = "${aws_iam_role.terraform_bucket.name}"
-  policy_arn = "${aws_iam_policy.terraform_bucket.arn}"
+  role       = aws_iam_role.terraform_bucket.name
+  policy_arn = aws_iam_policy.terraform_bucket.arn
 }
+
