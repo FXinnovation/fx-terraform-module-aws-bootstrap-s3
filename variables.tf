@@ -12,3 +12,4 @@ variable "s3_region" {
   description = "Region where to create the S3 bucket."
   default     = "us-east-1"
 }
+
