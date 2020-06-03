@@ -2,11 +2,15 @@ resource "aws_kms_key" "terraform_bucket" {
   description             = "This key is used to encrypt terraform state file bucket."
   deletion_window_in_days = 10
 
-  tags = {
-    Name        = "KMS key for S3 bucket for terraform state files."
-    Environment = "Root"
-    Terraform   = "true"
-  }
+  tags = merge(
+    {
+      Name         = "KMS key for S3 bucket for terraform state files."
+      Environment  = "Root"
+      Terraform    = "true"
+      "managed-by" = "terraform"
+    },
+    var.tags
+  )
 }
 
 resource "aws_s3_bucket" "terraform_bucket" {
@@ -14,11 +18,15 @@ resource "aws_s3_bucket" "terraform_bucket" {
   acl           = "private"
   region        = var.s3_region
 
-  tags = {
-    Name        = "Terraform state files bucket."
-    Environment = "Root"
-    Terraform   = "true"
-  }
+  tags = merge(
+    {
+      Name         = "Terraform state files bucket."
+      Environment  = "Root"
+      Terraform    = "true"
+      "managed-by" = "terraform"
+    },
+    var.tags
+  )
 
   versioning {
     enabled = true
@@ -86,4 +94,3 @@ resource "aws_iam_role_policy_attachment" "terraform_bucket" {
   role       = aws_iam_role.terraform_bucket.name
   policy_arn = aws_iam_policy.terraform_bucket.arn
 }
-

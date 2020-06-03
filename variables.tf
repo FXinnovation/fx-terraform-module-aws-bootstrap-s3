@@ -13,3 +13,7 @@ variable "s3_region" {
   default     = "us-east-1"
 }
 
+variable "tags" {
+  description = "Additionnal tags to add to all AWS resources."
+  default     = {}
+}

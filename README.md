@@ -5,13 +5,27 @@ Bootstrap terraform AWS S3 repository.
 This module should be used in a client-specific bootstrap terraform module.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | ~> 0.12 |
+| aws | ~> 2.34 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | ~> 2.34 |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| s3\_bucket\_prefix | Prefix of the bucket that will contain terraform state files. | string | `"vendor-tfstate"` | no |
-| s3\_region | Region where to create the S3 bucket. | string | `"us-east-1"` | no |
-| vendor\_prefix | Initials of the company which the project is bootstrapped. | string | `"vendor"` | no |
+|------|-------------|------|---------|:--------:|
+| s3\_bucket\_prefix | Prefix of the bucket that will contain terraform state files. | `string` | `"vendor-tfstate"` | no |
+| s3\_region | Region where to create the S3 bucket. | `string` | `"us-east-1"` | no |
+| tags | Additionnal tags to add to all AWS resources. | `map` | `{}` | no |
+| vendor\_prefix | Initials of the company which the project is bootstrapped. | `string` | `"vendor"` | no |
 
 ## Outputs
 

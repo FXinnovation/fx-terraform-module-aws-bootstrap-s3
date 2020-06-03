@@ -52,4 +52,3 @@ output "iam_role_unique_id" {
   description = "The stable and unique string identifying the role to access the terraform state files bucket."
   value       = aws_iam_role.terraform_bucket.unique_id
 }
-
